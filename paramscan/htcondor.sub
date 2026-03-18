@@ -1,0 +1,14 @@
+executable              = run.sh
+arguments               = "python simulation.py"
+output                  = out.$(ClusterId).$(ProcId)
+error                   = err.$(ClusterId).$(ProcId)
+log                     = log.$(ClusterId)
+should_transfer_files   = YES
+transfer_input_files    = root://eosuser.cern.ch//eos/user/e/ekatrali/xsuite-apptainer-demo/paramscan/simulation.py, \
+                            root://eosuser.cern.ch//eos/user/e/ekatrali/xsuite-apptainer-demo/paramscan/wake_lhc_injection.dat, \
+                            root://eosuser.cern.ch//eos/user/e/ekatrali/xsuite-apptainer-demo/paramscan/$(folder)/sim_params.py
+output_destination      = root://eosuser.cern.ch//eos/user/e/ekatrali/xsuite-apptainer-demo/results/
+when_to_transfer_output = ON_EXIT
+transfer_output_files   = *
+MY.XRDCP_CREATE_DIR     = True
+queue folder from scan_dirs.txt
