@@ -7,7 +7,6 @@ import numpy as np
 # User settings
 # -------------------------
 source_file = Path("sim_params.py")      # template file to copy
-base_dir = Path("bunch_intensity_scan")  # parent directory for all scan folders
 output_list = Path("scan_dirs.txt")      # txt file with relative folder paths
 
 # Bunch intensity scan
@@ -20,13 +19,7 @@ print("Bunch intensity scan:", bunch_intensity_scan)
 # Helpers
 # -------------------------
 def folder_name_from_value(value: float) -> str:
-    """
-    Make a safe folder name from the intensity value.
-    Example: 1.0e12 -> bint_1p0e12
-    """
-    scaled = value / 1e12
-    s = f"{scaled:.1f}".replace(".", "p")
-    return f"bint_{s}e12"
+    return f"bunchmonitor_with_bellows_bint_{value:.2e}"
 
 def set_bunch_intensity_in_file(filepath: Path, value: float) -> None:
     """
@@ -53,12 +46,10 @@ def set_bunch_intensity_in_file(filepath: Path, value: float) -> None:
 if not source_file.exists():
     raise FileNotFoundError(f"Template file not found: {source_file}")
 
-base_dir.mkdir(parents=True, exist_ok=True)
-
 relative_paths = []
 
 for value in bunch_intensity_scan:
-    folder = base_dir / folder_name_from_value(value)
+    folder = Path(folder_name_from_value(value))
     folder.mkdir(parents=True, exist_ok=True)
 
     dst_file = folder / source_file.name
@@ -71,5 +62,5 @@ for value in bunch_intensity_scan:
 # Write folder list for HTCondor
 output_list.write_text("\n".join(relative_paths) + "\n")
 
-print(f"Created {len(relative_paths)} folders under: {base_dir}")
+print(f"Created {len(relative_paths)} folders")
 print(f"Wrote folder list to: {output_list}")

@@ -7,6 +7,6 @@ should_transfer_files   = YES
 transfer_input_files    = simulation.py, wake_lhc_injection.dat, $(folder)/sim_params.py
 output_destination      = root://eosuser.cern.ch//eos/user/e/ekatrali/xsuite-apptainer-demo/results/
 when_to_transfer_output = ON_EXIT
-transfer_output_files   = *
+transfer_output_files   = $(folder)_bunches.h5, $(folder)_slices.h5
 MY.XRDCP_CREATE_DIR     = True
 queue folder from scan_dirs.txt
