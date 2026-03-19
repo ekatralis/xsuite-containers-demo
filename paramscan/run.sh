@@ -4,6 +4,7 @@ CONTAINER_FULLPATH="/cvmfs/unpacked.cern.ch/ghcr.io/ekatralis/xsuite-containers:
 echo $CONTAINER_FULLPATH
 containerrun() {
   apptainer exec \
+    --env PYTHONNOUSERSITE=1 \
     --home "$_CONDOR_SCRATCH_DIR" \
     --writable-tmpfs \
     --cleanenv \

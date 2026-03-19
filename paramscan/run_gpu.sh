@@ -3,6 +3,7 @@
 CONTAINER_FULLPATH="/cvmfs/unpacked.cern.ch/ghcr.io/ekatralis/xsuite-containers:latest-cuda12.8"
 containerrun() {
   apptainer exec \
+    --env PYTHONNOUSERSITE=1 \
     --home "$_CONDOR_SCRATCH_DIR" \
     --writable-tmpfs \
     --cleanenv \
