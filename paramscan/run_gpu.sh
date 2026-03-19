@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-CONTAINER_FULLPATH="/cvmfs/unpacked.cern.ch/ghcr.io/ekatralis/xsuite-containers:latest"
-echo $CONTAINER_FULLPATH
+CONTAINER_FULLPATH="/cvmfs/unpacked.cern.ch/ghcr.io/ekatralis/xsuite-containers:latest-cuda12.8"
 containerrun() {
   apptainer exec \
     --home "$_CONDOR_SCRATCH_DIR" \
     --writable-tmpfs \
     --cleanenv \
+    --nv \
     $CONTAINER_FULLPATH \
     "$@"
 }
