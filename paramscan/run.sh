@@ -12,10 +12,16 @@ containerrun() {
     "$@"
 }
 
-echo "Node info--------------------"
+# Optional: Print node info
+echo "************************ NODE INFO *************************" 
 hostname -A
 hostname -I
 lscpu
-echo "Env node info ---------------"
+echo "*********************** END NODE INFO ***********************"
+
+# Important: Print container version for future reference
+echo "********************** CONTAINER INFO **********************"
+containerrun bash -lc 'echo $XSUITE_CONTAINER_VERSION'
+echo "******************** END CONTAINER INFO ********************" 
 
 containerrun "$@"
